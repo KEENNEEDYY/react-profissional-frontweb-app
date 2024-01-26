@@ -3,6 +3,25 @@ import HeaderClient from '../../components/HeaderClient';
 import SearchBar from '../../components/SeachBar';
 import CatalogCard from '../../components/CatalogCard';
 import { ButtonNextPage } from '../../components/ButtonNextPage';
+import { ProductDTO } from '../../models/products';
+
+const product: ProductDTO = {
+    id: 2,
+    name: "Computador Gamer XT",
+    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum, sunt",
+    imgUrl: "/src/assets/computer.png",
+    price: 5000.00,
+    categories:[
+      {
+        id: 2,
+        name: "Eletrônicos"
+      },
+      {
+        id: 3,
+        name: "Computadores"
+      }
+    ]
+  }
 
 export default function Catalog() {
     return (
@@ -13,126 +32,19 @@ export default function Catalog() {
                     <SearchBar />
 
                     <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
-                        <CatalogCard />
-                        <CatalogCard />
-                        <CatalogCard />
-                        <CatalogCard />
-                        <CatalogCard />
-                        <CatalogCard />
-                        <CatalogCard />
-                        <CatalogCard />
-                        <CatalogCard />
-                        <CatalogCard />
-
-
-                        <>
-                            {/*  <div className="dsc-card">
-                                <div className="dsc-catalog-card-top dsc-line-bottom">
-                                <img src={computerImg } alt="Computer" />
-                                </div>
-                                <div className="dsc-catalog-card-bottom">
-                                <h3>R$ 5000,00</h3>
-                                <h4>
-                                    Computador Gamer XT com suporte e 16GB de memória e processador
-                                    turbo plus
-                                </h4>
-                                </div>
-                            </div>
-                            <div className="dsc-card">
-                                <div className="dsc-catalog-card-top dsc-line-bottom">
-                                <img src={computerImg } alt="Computer" />
-                                </div>
-                                <div className="dsc-catalog-card-bottom">
-                                <h3>R$ 5000,00</h3>
-                                <h4>
-                                    Computador Gamer XT
-                                </h4>
-                                </div>
-                            </div>
-                            <div className="dsc-card">
-                                <div className="dsc-catalog-card-top dsc-line-bottom">
-                                <img src={computerImg } alt="Computer" />
-                                </div>
-                                <div className="dsc-catalog-card-bottom">
-                                <h3>R$ 5000,00</h3>
-                                <h4>
-                                    Computador Gamer XT
-                                </h4>
-                                </div>
-                            </div>
-                            <div className="dsc-card">
-                                <div className="dsc-catalog-card-top dsc-line-bottom">
-                                <img src={computerImg } alt="Computer" />
-                                </div>
-                                <div className="dsc-catalog-card-bottom">
-                                <h3>R$ 5000,00</h3>
-                                <h4>
-                                    Computador Gamer XT
-                                </h4>
-                                </div>
-                            </div>
-                            <div className="dsc-card">
-                                <div className="dsc-catalog-card-top dsc-line-bottom">
-                                <img src={computerImg } alt="Computer" />
-                                </div>
-                                <div className="dsc-catalog-card-bottom">
-                                <h3>R$ 5000,00</h3>
-                                <h4>
-                                    Computador Gamer XT
-                                </h4>
-                                </div>
-                            </div>
-                            <div className="dsc-card">
-                                <div className="dsc-catalog-card-top dsc-line-bottom">
-                                <img src={computerImg } alt="Computer" />
-                                </div>
-                                <div className="dsc-catalog-card-bottom">
-                                <h3>R$ 5000,00</h3>
-                                <h4>
-                                    Computador Gamer XT
-                                </h4>
-                                </div>
-                            </div>
-                            <div className="dsc-card">
-                                <div className="dsc-catalog-card-top dsc-line-bottom">
-                                <img src={computerImg } alt="Computer" />
-                                </div>
-                                <div className="dsc-catalog-card-bottom">
-                                <h3>R$ 5000,00</h3>
-                                <h4>
-                                    Computador Gamer XT
-                                </h4>
-                                </div>
-                            </div>
-                            <div className="dsc-card">
-                                <div className="dsc-catalog-card-top dsc-line-bottom">
-                                <img src={computerImg } alt="Computer" />
-                                </div>
-                                <div className="dsc-catalog-card-bottom">
-                                <h3>R$ 5000,00</h3>
-                                <h4>
-                                    Computador Gamer XT
-                                </h4>
-                                </div>
-                            </div>
-                            <div className="dsc-card">
-                                <div className="dsc-catalog-card-top dsc-line-bottom">
-                                <img src={computerImg } alt="Computer" />
-                                </div>
-                                <div className="dsc-catalog-card-bottom">
-                                <h3>R$ 5000,00</h3>
-                                <h4>
-                                    Computador Gamer XT
-                                </h4>
-                                </div>
-                            </div> */}
-                        </>
-
-
-
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
                     </div>
 
-                    <ButtonNextPage />
+                    <ButtonNextPage text='Carregar mais'/>
                 </section>
             </main>
         </>
