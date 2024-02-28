@@ -25,8 +25,6 @@ const product: ProductDTO = {
 
 export default function Catalog() {
     return (
-        <>
-            <HeaderClient />
             <main>
                 <section id="catalog-section" className="dsc-container">
                     <SearchBar />
@@ -47,6 +45,5 @@ export default function Catalog() {
                     <ButtonNextPage text='Carregar mais'/>
                 </section>
             </main>
-        </>
     )
 }
