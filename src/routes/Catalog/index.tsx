@@ -1,27 +1,9 @@
-import './styles.css';
-import HeaderClient from '../../components/HeaderClient';
-import SearchBar from '../../components/SeachBar';
-import CatalogCard from '../../components/CatalogCard';
 import { ButtonNextPage } from '../../components/ButtonNextPage';
-import { ProductDTO } from '../../models/products';
+import CatalogCard from '../../components/CatalogCard';
+import SearchBar from '../../components/SeachBar';
+import * as productService from '../../services/product-service';
 
-const product: ProductDTO = {
-    id: 2,
-    name: "Computador Gamer XT",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum, sunt",
-    imgUrl: "/src/assets/computer.png",
-    price: 5000.00,
-    categories:[
-      {
-        id: 2,
-        name: "Eletrônicos"
-      },
-      {
-        id: 3,
-        name: "Computadores"
-      }
-    ]
-  }
+import './styles.css';
 
 export default function Catalog() {
     return (
@@ -30,18 +12,12 @@ export default function Catalog() {
                     <SearchBar />
 
                     <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
-                        <CatalogCard product={product}/>
-                        <CatalogCard product={product}/>
-                        <CatalogCard product={product}/>
-                        <CatalogCard product={product}/>
-                        <CatalogCard product={product}/>
-                        <CatalogCard product={product}/>
-                        <CatalogCard product={product}/>
-                        <CatalogCard product={product}/>
-                        <CatalogCard product={product}/>
-                        <CatalogCard product={product}/>
+                      {
+                        productService.findAll().map(product => (
+                          <CatalogCard product={product} key={product.id}/>
+                        ) )
+                      }
                     </div>
-
                     <ButtonNextPage text='Carregar mais'/>
                 </section>
             </main>
