@@ -1,4 +1,5 @@
-import computerImg from '../../../assets/computer.png';
+import { useState } from 'react';
+import * as cartService from '../../../services/cart-service';
 
 const cart = {
     items: [
@@ -19,16 +20,20 @@ const cart = {
     ]
 }
 
+import { OrderDTO } from '../../../models/order';
 import './styles.css';
 export default function Cart() {
+
+    const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
+
     return (
         <main>
             <section id="cart-container-section" className="dsc-container">
                 <div className="dsc-card dsc-mb20">
                     {
                         cart.items.map(item => (
-                            <div className="dsc-cart-item-container dsc-line-bottom">
-                                <div key={item.productId} className="dsc-cart-item-left">
+                            <div key={item.productId} className="dsc-cart-item-container dsc-line-bottom">
+                                <div className="dsc-cart-item-left">
                                     <img src={item.imgUrl} alt="Computador" />
                                     <div className="dsc-cart-item-description">
                                         <h3>{item.name}</h3>
