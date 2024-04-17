@@ -17,7 +17,7 @@ export default function SearchBar({onSearch} : Props) {
     function handleChange(event: any){
         const value = event.target.value;
         setText(value);
-        onSearch(value);
+        // onSearch(value); // cada letra digitada neste caso esta fazendo uma consulta diferente no banco de dados;
     }
 
     function handleResetClick(){
