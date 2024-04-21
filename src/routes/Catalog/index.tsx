@@ -25,7 +25,7 @@ export default function Catalog() {
 
   useEffect(() => {
     productService.findPageRequest(queryParams.page, queryParams.name)
-      .then(response => {
+      .then( response => {
         const nextPage = response.data.content;
         setProducts(products.concat(nextPage));
         setIsLastPage(response.data.last);
