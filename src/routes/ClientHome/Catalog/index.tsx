@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { ButtonNextPage } from '../../components/ButtonNextPage';
-import CatalogCard from '../../components/CatalogCard';
-import SearchBar from '../../components/SeachBar';
-import { ProductDTO } from '../../models/products';
+import { ButtonNextPage } from '../../../components/ButtonNextPage';
+import CatalogCard from '../../../components/CatalogCard';
+import SearchBar from '../../../components/SeachBar';
+import { ProductDTO } from '../../../models/products';
 
-import * as productService from '../../services/product-service';
+import * as productService from '../../../services/product-service';
 import './styles.css';
 
 type QueryParams = {

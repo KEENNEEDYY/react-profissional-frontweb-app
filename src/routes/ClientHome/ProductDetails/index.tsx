@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import ButtonInverse from '../../components/ButtonInverse';
-import ButtonPrimary from '../../components/ButtonPrimary';
-import ProductDetailsCard from '../../components/ProductDetailsCard';
-import { ProductDTO } from '../../models/products';
-import * as productService from '../../services/product-service';
-import * as cartService from '../../services/cart-service';
+import ButtonInverse from '../../..//components/ButtonInverse';
+import ButtonPrimary from '../../..//components/ButtonPrimary';
+import ProductDetailsCard from '../../..//components/ProductDetailsCard';
+import { ProductDTO } from '../../..//models/products';
+import * as productService from '../../..//services/product-service';
+import * as cartService from '../../..//services/cart-service';
 
 
 import './styles.css';
-import { ContextCartCount } from '../../utils/context-cart';
+import { ContextCartCount } from '../../..//utils/context-cart';
 export default function ProductDetails() {
 
   const params = useParams();
