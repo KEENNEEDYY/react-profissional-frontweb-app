@@ -13,7 +13,7 @@ export default function AdminHome() {
             setUser(response.data);
         })
         .catch(error => {
-            console.log("Error ", error);
+            //console.log("Error ", error);
         })
     } , []);
 
