@@ -6,6 +6,7 @@ import { ProductDTO } from '../../../models/products';
 
 import * as productService from '../../../services/product-service';
 import './styles.css';
+import { isAuthenticated } from '../../../services/auth-service';
 
 type QueryParams = {
   page: number;
@@ -29,6 +30,7 @@ export default function Catalog() {
         const nextPage = response.data.content;
         setProducts(products.concat(nextPage));
         setIsLastPage(response.data.last);
+        console.log(isAuthenticated());
       })
   }, [queryParams]);
 

@@ -37,9 +37,9 @@ axios.interceptors.response.use(
     function (error) {
         // DO SOMETHING WITH RESPONSE ERROR
         
-        error.response.status === 401 ? history.push("/login"): ()=>{};
+        error.response.status === 401 ? history.push("/login"): {};
         
-        error.response.status === 403 ? history.push("/catalog") : ()=>{};
+        error.response.status === 403 ? history.push("/catalog") : {};
 
         return Promise.reject(error);
     }
