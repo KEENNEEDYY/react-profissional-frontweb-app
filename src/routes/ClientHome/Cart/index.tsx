@@ -1,12 +1,11 @@
+import './styles.css';
+import { OrderDTO } from '../../../models/order';
 import { useContext, useState } from 'react';
+import { ContextCartCount } from '../../../utils/context-cart';
+import { Link, useNavigate } from 'react-router-dom';
 import * as cartService from '../../../services/cart-service';
 import * as orderService from '../../../services/order-service';
-import { OrderDTO } from '../../../models/order';
 
-
-import './styles.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { ContextCartCount } from '../../../utils/context-cart';
 export default function Cart() {
 
     const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
