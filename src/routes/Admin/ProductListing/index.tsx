@@ -19,6 +19,7 @@ export default function ProductListing() {
 
   const [dialogConfirmationData, setDialogConfirmationData] = useState({
     visible: false,
+    id: 0,
     message: "Tem certeza!"
   });
 
@@ -54,8 +55,16 @@ export default function ProductListing() {
     setQueryParams({ ...queryParams, name: searchText, page: 0 });
   }
 
-  function handleDialogConfirmationAnswer(answer: boolean){
-    console.log("Resposta", answer)
+  function handleDialogConfirmationAnswer(answer: boolean, id : number){
+    if(answer){
+      productService.deleteById(id).then( () => {
+        setProducts([]);
+        setQueryParams({...queryParams, page: 0});
+      })
+      .catch(error => {
+        setDialogInfoData({visible: true, message: error.response.data.error});
+      });
+    }
     setDialogConfirmationData({...dialogConfirmationData, visible:false});
   }
 
@@ -63,8 +72,8 @@ export default function ProductListing() {
     setDialogInfoData({...dialogInfoData, visible:false});
   }
 
-  function handleDeleteClick(){
-    setDialogConfirmationData({...dialogConfirmationData, visible:true});
+  function handleDeleteClick(productId: number){
+    setDialogConfirmationData({...dialogConfirmationData, id: productId, visible: true});
   }
 
   return (
@@ -99,7 +108,7 @@ export default function ProductListing() {
                   <td className="dsc-tb768">R$ {product.price.toFixed(2)}</td>
                   <td className="dsc-txt-left">{product.name}</td>
                   <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                  <td><img onClick={handleDeleteClick} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
+                  <td><img onClick={() => handleDeleteClick(product.id)} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
                 </tr>
               ))
             }
@@ -115,9 +124,14 @@ export default function ProductListing() {
       {dialogInfoData.visible && 
         <DialogInfo message={dialogInfoData.message} onDialogClose={handleDialogInfoClose} />
       }
+
       {dialogConfirmationData.visible && 
-        <DialogConfirmation message={dialogConfirmationData.message} onDialogAnswer={handleDialogConfirmationAnswer} />
+        <DialogConfirmation 
+          id={dialogConfirmationData.id} 
+          message={dialogConfirmationData.message} 
+          onDialogAnswer={handleDialogConfirmationAnswer} />
       }
+
     </main>
   )
 }
