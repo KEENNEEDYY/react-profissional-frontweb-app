@@ -4,33 +4,50 @@ import * as authService from '../../../services/auth-service';
 import './styles.css';
 import { useNavigate } from 'react-router-dom';
 import { ContextToken } from '../../../utils/contex-token';
+import FormInput from '../../../components/FormInput';
 
 export default function Login() {
 
-    const {setContextTokenPayload} = useContext(ContextToken);
+    const { setContextTokenPayload } = useContext(ContextToken);
 
     const navigate = useNavigate();
 
-    const [formdata, setFormData] = useState<CredentialsDTO>({
-        username: '',
-        password: ''
+    const [formdata, setFormData] = useState<any>({
+        username: {
+            value: "",
+            id: "username",
+            name: "username",
+            type: "text",
+            placeholder: "Email",
+            validation: function (value: string) {
+                return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value.toLowerCase());
+            },
+            message: "Favor informar um email válido",
+        },
+        password: {
+            value: "",
+            id: "password",
+            name: "password",
+            type: "password",
+            placeholder: "Senha",
+        }
     })
-
-    function handlesubmit(event: any){
+    
+    function handlesubmit(event: any) {
         event.preventDefault();
-        authService.loginRequest(formdata)
-        .then( response => {
-            authService.saveAccessToken(response.data.access_token);
-            setContextTokenPayload(authService.getAccessTokenPayload());
-            navigate("/cart");
-        })
-        .catch(error => console.log("Error no login: ", error));
+        authService.loginRequest({username: formdata.username.value,password: formdata.password.value})
+            .then(response => {
+                authService.saveAccessToken(response.data.access_token);
+                setContextTokenPayload(authService.getAccessTokenPayload());
+                navigate("/cart");
+            })
+            .catch(error => console.log("Error no login: ", error));
     }
 
-    function handleInputChange(event: any){
+    function handleInputChange(event: any) {
         const name = event.target.name;
         const value = event.target.value;
-        setFormData({...formdata, [name]: value});
+        setFormData({ ...formdata, [name]: {...formdata[name], value: value} });
     }
 
     return (
@@ -41,23 +58,17 @@ export default function Login() {
                         <h2>Login</h2>
                         <div className="dsc-form-controls-container">
                             <div>
-                                <input 
-                                    name="username"
-                                    value={formdata.username}
-                                    className="dsc-form-control" 
-                                    type="text" 
-                                    placeholder="Email" 
+                                <FormInput
+                                    {...formdata.username}                                    
                                     onChange={handleInputChange}
+                                    className="dsc-form-control"
                                 />
-                                    <div className="dsc-form-error"></div>
+                                <div className="dsc-form-error"></div>
                             </div>
                             <div>
-                                <input 
-                                    name="password"
-                                    value={formdata.password}
-                                    className="dsc-form-control" 
-                                    type="password" 
-                                    placeholder="Senha" 
+                                <input
+                                    {...formdata.password}
+                                    className="dsc-form-control"
                                     onChange={handleInputChange}
                                 />
                             </div>
