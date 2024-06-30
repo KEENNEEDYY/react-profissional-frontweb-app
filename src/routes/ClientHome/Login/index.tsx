@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { CredentialsDTO } from '../../../models/auth';
+import * as forms from '../../../utils/forms';
 import * as authService from '../../../services/auth-service';
 import './styles.css';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    const [formdata, setFormData] = useState<any>({
+    const [formData, setFormData] = useState<any>({
         username: {
             value: "",
             id: "username",
@@ -35,7 +35,7 @@ export default function Login() {
     
     function handlesubmit(event: any) {
         event.preventDefault();
-        authService.loginRequest({username: formdata.username.value,password: formdata.password.value})
+        authService.loginRequest({username: formData.username.value,password: formData.password.value})
             .then(response => {
                 authService.saveAccessToken(response.data.access_token);
                 setContextTokenPayload(authService.getAccessTokenPayload());
@@ -45,9 +45,7 @@ export default function Login() {
     }
 
     function handleInputChange(event: any) {
-        const name = event.target.name;
-        const value = event.target.value;
-        setFormData({ ...formdata, [name]: {...formdata[name], value: value} });
+        setFormData(forms.update(formData, event.target.name, event.target.value));
     }
 
     return (
@@ -59,7 +57,7 @@ export default function Login() {
                         <div className="dsc-form-controls-container">
                             <div>
                                 <FormInput
-                                    {...formdata.username}                                    
+                                    {...formData.username}                                    
                                     onChange={handleInputChange}
                                     className="dsc-form-control"
                                 />
@@ -67,7 +65,7 @@ export default function Login() {
                             </div>
                             <div>
                                 <input
-                                    {...formdata.password}
+                                    {...formData.password}
                                     className="dsc-form-control"
                                     onChange={handleInputChange}
                                 />
