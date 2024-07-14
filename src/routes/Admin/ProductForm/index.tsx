@@ -17,7 +17,11 @@ export default function ProductForm() {
       id: "name",
       name: "name",
       type: "text",
-      placeholder: "Nome"
+      placeholder: "Nome",
+      validation : function(value: string){
+        return /^.{3,80}$/.test(value);
+      },
+      message:"Favor informar um nome de 3 a 80 caracteres"
     },
     price: {
       value: "",
