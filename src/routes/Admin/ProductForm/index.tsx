@@ -1,5 +1,5 @@
 import './styles.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import FormInput from '../../../components/FormInput';
 import * as forms from '../../../utils/forms';
@@ -13,6 +13,8 @@ import { selectStyles } from '../../../utils/select';
 export default function ProductForm() {
 
   const params = useParams();
+
+  const navigate = useNavigate();
 
   const isEditing = params.productId !== 'create';
 
@@ -102,8 +104,14 @@ export default function ProductForm() {
       setFormData(formDataValidated);
       return;
     }
-    
-    console.log(forms.toValues(formData));
+    const requestBody = forms.toValues(formData);
+    if(isEditing){
+      requestBody.id = params.productId;
+    }
+    const request = isEditing ? productService.updateRequest(requestBody) : productService.insertRequest(requestBody) ;
+    request.then(() => {
+      navigate("/admin/products");
+    });
   }
 
   return (
